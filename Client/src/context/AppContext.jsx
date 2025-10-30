@@ -1,10 +1,11 @@
 import {  createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { dummyUserData, dummyChats } from "../assets/assets";
 
 
 const AppContext = createContext()
 
-export const AppContextProvider = ({Children})=>{
+export const AppContextProvider = ({ children }) => {
 
     const navigate =useNavigate()
     const [user, setUser] = useState(null);
@@ -22,21 +23,27 @@ export const AppContextProvider = ({Children})=>{
     }
 
     useEffect(()=>{
-        if(user)
-    }, [user])
+        if(theme === 'dark'){
+            document.documentElement.classList.add('dark')
+        }else{
+            document.documentElement.classList.remove('dark')
+        }
+    }, [theme])
 
     useEffect(()=>{
+        // populate initial user and chats on app start
         fetchUser()
+        fetchUserChats()
 
     },[])
 
 
     const value={
-        navigate, user, setUser, fetchUser, chats, setChats, selectedChat, theme
+        navigate, user, setUser, fetchUser, chats, setChats, selectedChat, theme, setTheme
     }
     return (
         <AppContext.Provider value={value}>
-            {Children}
+            {children}
 
         </AppContext.Provider>
     )
