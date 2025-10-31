@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-@import "tailwindcss";
+
+/* Tailwind v4 setup: include preflight and utilities */
+@import "tailwindcss/preflight";
+@tailwind utilities;
 
 :root {
   --color-primary: #E6CCFF;
@@ -9,9 +12,9 @@
   font-family: "Outfit", sans-serif;
 }
 
-@theme {
+/* @theme {
   --color-primary: #E6CCFF;
-}
+} */
 
 /* .dark * {
   @media (prefers-color-scheme: dark) {

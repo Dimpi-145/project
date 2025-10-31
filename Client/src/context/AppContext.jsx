@@ -1,6 +1,6 @@
 import {  createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { dummyUserData, dummyChats } from "../assets/assets";
+import { dummyPdfChats, dummyChats } from "../assets/assets";
 
 
 const AppContext = createContext()
@@ -14,7 +14,7 @@ export const AppContextProvider = ({ children }) => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     
     const fetchUser = async () =>{
-        setUser(dummyUserData)
+        setUser(dummyPdfChats)
     }
 
     const fetchUserChats = async () => {
@@ -28,7 +28,10 @@ export const AppContextProvider = ({ children }) => {
         }else{
             document.documentElement.classList.remove('dark')
         }
+        localStorage.setItem('theme', theme)
     }, [theme])
+
+    
 
     useEffect(()=>{
         // populate initial user and chats on app start
