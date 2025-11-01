@@ -3,10 +3,7 @@
 /* Tailwind v4 setup: include preflight and utilities */
 @import "tailwindcss";
 
-
-:root {
-  --color-primary: #E6CCFF;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 * {
   font-family: "Outfit", sans-serif;
@@ -16,11 +13,7 @@
   --color-primary: #E6CCFF;
 }
 
-/* .dark * {
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
-} */
+
 
 ::-webkit-scrollbar {
   display: none;
