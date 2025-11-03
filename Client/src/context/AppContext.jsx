@@ -14,8 +14,22 @@ export const AppContextProvider = ({ children }) => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     
     const fetchUser = async () =>{
-        setUser(dummyPdfChats)
+        setUser()
     }
+
+    const createNewChat = () => {
+        const newChat = {
+            _id: Date.now().toString(),
+            name: 'New Chat',
+            messages: [],
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+        setChats(prevChats => [newChat, ...prevChats]);
+        setSelectedChat(newChat);
+        navigate('/');
+        return newChat;
+    };
 
     const fetchUserChats = async () => {
         setChats(dummyChats)
@@ -52,7 +66,7 @@ export const AppContextProvider = ({ children }) => {
 
 
     const value={
-        navigate, user, setUser, fetchUser, chats, setChats, selectedChat, setSelectedChat, theme, setTheme
+        navigate, user, setUser, fetchUser, chats, setChats, selectedChat, setSelectedChat, theme, setTheme, createNewChat
     }
     return (
         <AppContext.Provider value={value}>

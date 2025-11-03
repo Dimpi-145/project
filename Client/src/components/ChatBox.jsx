@@ -12,6 +12,16 @@ const ChatBox = () => {
 
   const [loading, setLoading ]= useState(false)
 
+
+  const [prompt, setPrompt] = useState('')
+  const [mode, setMode] = useState('text')
+  const [isPublished, setIsPublished] = useState(false)
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+  }
+
+
   useEffect(()=> {
     if(selectedChat){
       setMessages(selectedChat.messages)
@@ -38,8 +48,25 @@ const ChatBox = () => {
 
 
       {/* Prompt input box */}
-      <form action="">
-
+  <form onSubmit={onSubmit} className='bg-primary/20 dark:bg-[#583C79]/30 border border-primary dark:border-[#80609F]/30 rounded-full w-full max-w-2xl p-3 pl-4 max-auto flex gap-4 items-center lg:ml-10 xl:ml-25'>
+        <label className='cursor-pointer'>
+          <input 
+            type="file" 
+            className='hidden' 
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                setMode('file');
+                setPrompt(file.name);
+              }
+            }}
+          />
+          <img src={assets.attachment_icon} alt="Attach file" className='w-6 h-6' />
+        </label>
+        <input onChange={(e)=>setPrompt(e.target.value)} value={prompt} type="text" placeholder="Type your message here..." className='flex-1 w-full text-sm outline-none' required/>
+        <button disabled={loading}>
+          <img src={loading ? assets.stop_icon : assets.send_icon} className='w-8 cursor-pointer' alt=""/>
+        </button>
       </form>
 
       
