@@ -33,7 +33,8 @@ export const AppContextProvider = ({ children }) => {
 
     useEffect(()=>{
         if(user){
-            fetchUsersChats()
+            // call the correct function to load chats for the user
+            fetchUserChats()
         }else{
             setChats([])
             setSelectedChat(null)
@@ -51,7 +52,7 @@ export const AppContextProvider = ({ children }) => {
 
 
     const value={
-        navigate, user, setUser, fetchUser, chats, setChats, selectedChat, theme, setTheme
+        navigate, user, setUser, fetchUser, chats, setChats, selectedChat, setSelectedChat, theme, setTheme
     }
     return (
         <AppContext.Provider value={value}>
