@@ -14,7 +14,7 @@ export const AppContextProvider = ({ children }) => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     
     const fetchUser = async () =>{
-        setUser()
+        setUser(dummyPdfChats)
     }
 
     const createNewChat = () => {
@@ -47,8 +47,18 @@ export const AppContextProvider = ({ children }) => {
 
     useEffect(()=>{
         if(user){
-            // call the correct function to load chats for the user
-            fetchUserChats()
+            // Load dummy chats first
+            setChats(dummyChats);
+            // Then create and select a new chat
+            const newChat = {
+                _id: Date.now().toString(),
+                name: 'New Chat',
+                messages: [],
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            setChats(prevChats => [newChat, ...prevChats]);
+            setSelectedChat(newChat);
         }else{
             setChats([])
             setSelectedChat(null)
@@ -58,10 +68,8 @@ export const AppContextProvider = ({ children }) => {
     
 
     useEffect(()=>{
-        // populate initial user and chats on app start
+        // populate initial user
         fetchUser()
-        fetchUserChats()
-
     },[])
 
 

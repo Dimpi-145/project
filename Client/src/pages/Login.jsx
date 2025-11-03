@@ -16,7 +16,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setUser({ name: name || 'Demo User', email });
-        navigate('/home');
+        navigate('/');
     }
 
     return (
